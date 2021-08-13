@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.sandim.todo"
-        minSdk 23
+        minSdk 21
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -29,6 +29,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
+
 }
 
 dependencies {
