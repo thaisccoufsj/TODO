@@ -3,8 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_add_task.xml" value="0.5454545336321368" />
-        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_main.xml" value="0.1703125" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/drawable/ic_add.xml" value="0.21510416666666668" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/drawable/ic_calendar.xml" value="0.21510416666666668" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/drawable/ic_delete.xml" value="0.21510416666666668" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/drawable/ic_more_vert.xml" value="0.21510416666666668" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/drawable/ic_navigate.xml" value="0.21510416666666668" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_add_task.xml" value="0.17454545076228378" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_detail_todo.xml" value="0.22909090412549746" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_list_todos.xml" value="0.2727272668160684" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/adapter_todo.xml" value="0.35999999219721035" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/empty_state.xml" value="0.15272726941699832" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/item_task.xml" value="0.22909090412549746" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/layout_loading.xml" value="0.1" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/menu/popup_menu.xml" value="0.1" />
       </map>
     </option>
   </component>
