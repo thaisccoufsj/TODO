@@ -6,12 +6,13 @@ import com.sandim.todo.model.Todo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class TodoRepoImpl:TodoRepo {
+class TodoRepoImpl(val application: Application):TodoRepo {
 
-    private lateinit var todoDao :TodoDao
+    private var todoDao :TodoDao
 
-    fun TodoRepo(application: Application){
+    init{
         val database = AppDatabase.getInstance(application)
         todoDao = database.todoDao()
     }
@@ -20,30 +21,44 @@ class TodoRepoImpl:TodoRepo {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val todo = todoDao.getTodo(id)
-                callback.onSucesso(todo)
+                withContext(Dispatchers.Main){
+                    callback.onSucesso(todo)
+                }
             }catch (e:Exception){
-                callback.onFalha(e)
+                withContext(Dispatchers.Main){
+                    callback.onFalha(e)
+                }
             }
         }
     }
 
     override fun getAll(callback: RepositoryCallback<List<Todo>>){
-
-        try{
-            val list = todoDao.getAll()
-            callback.onSucesso(list)
-        }catch(e:Exception){
-            callback.onFalha(e)
+        CoroutineScope(Dispatchers.IO).launch {
+            try{
+                val list = todoDao.getAll()
+                withContext(Dispatchers.Main){
+                    callback.onSucesso(list)
+                }
+            }catch(e:Exception){
+                withContext(Dispatchers.Main){
+                    callback.onFalha(e)
+                }
+            }
         }
+
     }
 
     override fun insert(todo: Todo,callback: RepositoryCallback<Long>){
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val id = todoDao.insert(todo)
-                callback.onSucesso(id)
+                withContext(Dispatchers.Main){
+                    callback.onSucesso(id)
+                }
             }catch (e:Exception){
-                callback.onFalha(e)
+                withContext(Dispatchers.Main){
+                    callback.onFalha(e)
+                }
             }
         }
     }
@@ -56,8 +71,10 @@ class TodoRepoImpl:TodoRepo {
             }catch (e:Exception){
                 0
             }
-            if(rows > 0) callback.onSucesso(rows)
-            else callback.onFalha(Exception("Falha ao atualizar"))
+            withContext(Dispatchers.Main){
+                if(rows > 0) callback.onSucesso(rows)
+                else callback.onFalha(Exception("Falha ao atualizar"))
+            }
         }
     }
 
@@ -68,8 +85,10 @@ class TodoRepoImpl:TodoRepo {
             }catch (e:Exception){
                 0
             }
-            if(rows > 0) callback.onSucesso(rows)
-            else callback.onFalha(Exception("Falha ao deletar"))
+            withContext(Dispatchers.Main){
+                if(rows > 0) callback.onSucesso(rows)
+                else callback.onFalha(Exception("Falha ao deletar"))
+            }
         }
     }
 

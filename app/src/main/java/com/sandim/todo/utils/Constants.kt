@@ -4,7 +4,7 @@ class Constants{
 
     companion object {
         const val CODE_RESULT_CREATE_SUCESS = 1
-        const val CODE_RESULT_REMOVE_SUCESS = 2
+        const val CODE_RESULT_REMOVE_SUCESS = 24
 
         const val KEY_EXTRA_TODO_ID = "com.sandim.todo.TODO_ID"
         const val KEY_EXTRA_TODO_INDEX = "com.sandim.todo.TODO_INDEX"

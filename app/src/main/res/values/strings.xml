@@ -13,7 +13,11 @@
     <string name="label_edit">Editar</string>
     <string name="label_delete">Deletar</string>
     <string name="label_yout_dont_have_tasks">Ops! Você não possui\n nenhuma tarefa</string>
-    <string name="text_loading">Carregando...</string>
+    <string name="text_loading">Carregando…</string>
     <string name="label_save">Salvar</string>
     <string name="label_header_edit_todo">Tarefa (id: #id)</string>
+    <string name="done">Finalizada</string>
+    <string name="tag_done">Finalizado</string>
+    <string name="tag_loading">Aguarde…</string>
+    <string name="appBar_detail_activity_edit">Editar Tarefa</string>
 </resources>

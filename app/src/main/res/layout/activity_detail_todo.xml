@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.MaterialToolbar
+    <!--<com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -15,7 +15,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:title="Editar Tarefa"
         app:navigationIcon="@drawable/ic_navigate"
-        />
+        />-->
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/appBar"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/toolbar"
+            android:background="?attr/colorPrimary"
+            app:title="Adicionar Tarefa"
+            app:navigationIcon="@drawable/ic_navigate"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
@@ -36,11 +54,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        tools:text="@string/label_header_edit_todo"
+        android:text="@string/label_header_edit_todo"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         app:layout_constraintEnd_toEndOf="@+id/guide_end"
         app:layout_constraintStart_toStartOf="@+id/guide_start"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/appBar"
         android:textColor="@color/black"
         />
 
@@ -129,11 +147,40 @@
         android:id="@+id/btn_cancel"
         app:layout_constraintStart_toStartOf="@id/guide_start"
         app:layout_constraintEnd_toEndOf="@id/guide_end"
-        app:layout_constraintBottom_toTopOf="@id/btn_createTask"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
         android:text="@string/label_cancel"
         android:textAllCaps="false"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@id/guide_start"
+        app:layout_constraintTop_toBottomOf="@+id/til_date"
+        android:layout_marginTop="20dp"
+        >
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/swDone"
+            android:padding="0dp"
+            tools:checked="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/done"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toEndOf="@+id/swDone"
+            app:layout_constraintTop_toBottomOf="@+id/til_date"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_marginStart="10dp"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="0dp"
@@ -145,7 +192,8 @@
         style="@style/Widget.MaterialComponents.Button"
         android:text="@string/label_save"
         android:textAllCaps="false"
-        android:id="@+id/btn_createTask"
+        android:id="@+id/btn_save"
+        android:stateListAnimator="@null"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

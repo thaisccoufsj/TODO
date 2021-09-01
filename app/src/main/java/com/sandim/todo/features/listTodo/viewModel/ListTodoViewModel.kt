@@ -3,6 +3,7 @@ package com.sandim.todo.features.listTodo.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.sandim.todo.data.repository.RepositoryCallback
 import com.sandim.todo.data.repository.TodoRepo
 import com.sandim.todo.model.StateView
@@ -15,7 +16,7 @@ class ListTodoViewModel(private val repository: TodoRepo):ViewModel() {
         get() = _stateView
 
     fun getAllTodo(){
-        if(_stateView.value != null) return
+        //if(_stateView.value != null) return
         _stateView.value = StateView.Loading
 
         repository.getAll(object : RepositoryCallback<List<Todo>>{
@@ -36,6 +37,7 @@ class ListTodoViewModel(private val repository: TodoRepo):ViewModel() {
         repository.delete(todo,object : RepositoryCallback<Int>{
             override fun onSucesso(todos: Int?) {
                 if((todos ?: 0) > 0){
+                    _stateView.value = StateView.Message("A tarefa foi excuída com sucesso")
                    getAllTodo()
                 }else{
                     _stateView.value = StateView.Error(Exception("Não foi posssível excluir a tarefa. "))

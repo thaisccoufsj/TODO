@@ -31,7 +31,9 @@
         android:id="@+id/fabAdd"
         android:layout_margin="10dp"
         app:srcCompat="@drawable/ic_add"
-        android:contentDescription="@string/label_create_task" />
+        android:contentDescription="@string/label_create_task"
+        android:backgroundTint="@color/colorFloatActionButton"
+        />
 
     <include
         android:id="@+id/viewLoading"
