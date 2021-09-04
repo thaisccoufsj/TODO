@@ -9,16 +9,21 @@
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/drawable/ic_more_vert.xml" value="0.21510416666666668" />
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/drawable/ic_navigate.xml" value="0.21510416666666668" />
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_add_task.xml" value="0.17454545076228378" />
-        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_detail_todo.xml" value="0.35999999219721035" />
-        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_list_todos.xml" value="0.19636363210756924" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_detail_todo.xml" value="0.5454545336321368" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_list_todos.xml" value="0.35999999219721035" />
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/adapter_todo.xml" value="0.35999999219721035" />
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/empty_state.xml" value="0.15272726941699832" />
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/item_task.xml" value="0.22909090412549746" />
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/layout_loading.xml" value="0.21818181345285476" />
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/list_item_todo.xml" value="0.5454545336321368" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/loading.xml" value="0.19895833333333332" />
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/layout/progress.xml" value="0.19895833333333332" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/menu/list_todo_filter.xml" value="0.19895833333333332" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/menu/menu_activity_list_todos_filter.xml" value="0.19895833333333332" />
         <entry key="..\:/Android/projetos/TODO/app/src/main/res/menu/popup_menu.xml" value="0.1" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1125" />
+        <entry key="..\:/Android/projetos/TODO/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1125" />
       </map>
     </option>
   </component>

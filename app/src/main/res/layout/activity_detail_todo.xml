@@ -6,17 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--<com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:title="Editar Tarefa"
-        app:navigationIcon="@drawable/ic_navigate"
-        />-->
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,26 +38,33 @@
         app:layout_constraintGuide_end="32dp"
         android:id="@+id/guide_end"/>
 
-    <TextView
-        android:id="@+id/tvHeader"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/label_header_edit_todo"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        app:layout_constraintEnd_toEndOf="@+id/guide_end"
-        app:layout_constraintStart_toStartOf="@+id/guide_start"
-        app:layout_constraintTop_toBottomOf="@+id/appBar"
-        android:textColor="@color/black"
-        />
+   <com.google.android.material.textfield.TextInputLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/tilId"
+       app:layout_constraintTop_toBottomOf="@id/appBar"
+       android:layout_marginTop="20dp"
+       app:layout_constraintStart_toStartOf="@id/guide_start"
+       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+       app:boxBackgroundColor="@color/background_field_disabled"
+       >
+       <com.google.android.material.textfield.TextInputEditText
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:inputType="none"
+           android:enabled="false"
+           android:focusable="false"
+           android:hint="@string/label_id"/>
+   </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@id/guide_start"
         app:layout_constraintEnd_toEndOf="@id/guide_end"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintTop_toBottomOf="@id/tvHeader"
+        app:layout_constraintTop_toBottomOf="@id/tilId"
         android:hint="@string/label_title"
         android:id="@+id/til_title"
         >
@@ -141,17 +137,6 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_cancel"
-        app:layout_constraintStart_toStartOf="@id/guide_start"
-        app:layout_constraintEnd_toEndOf="@id/guide_end"
-        app:layout_constraintBottom_toTopOf="@id/btn_save"
-        android:text="@string/label_cancel"
-        android:textAllCaps="false"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        />
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -171,7 +156,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/done"
+            android:text="@string/label_done"
             android:gravity="center_vertical"
             app:layout_constraintStart_toEndOf="@+id/swDone"
             app:layout_constraintTop_toBottomOf="@+id/til_date"
@@ -187,13 +172,25 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guide_start"
         app:layout_constraintEnd_toEndOf="@id/guide_end"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_delete"
         style="@style/Widget.MaterialComponents.Button"
         android:text="@string/label_save"
         android:textAllCaps="false"
         android:id="@+id/btn_save"
         android:stateListAnimator="@null"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_delete"
+        app:layout_constraintStart_toStartOf="@id/guide_start"
+        app:layout_constraintEnd_toEndOf="@id/guide_end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/label_delete"
+        android:layout_marginBottom="16dp"
+        android:textAllCaps="false"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

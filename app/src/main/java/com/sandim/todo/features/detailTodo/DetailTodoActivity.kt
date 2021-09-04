@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -46,11 +47,16 @@ class DetailTodoActivity:AppCompatActivity() {
                 finish()
             }
 
+            binding.btnDelete.visibility = View.GONE
+
             intent.extras?.getInt(Constants.KEY_EXTRA_TODO_ID,0)?.let { todoId ->
                if(todoId != 0){
                    binding.toolbar.title = getString(R.string.appBar_detail_activity_edit)
+                   binding.btnDelete.visibility = View.VISIBLE
                }
             }
+
+
 
             viewModel.stateView.observe(this,{stateView ->
                 when(stateView){
@@ -58,10 +64,19 @@ class DetailTodoActivity:AppCompatActivity() {
                        loading = createLoading(this)
                     }
 
+                    is StateView.DataDeleted -> {
+                        MaterialAlertDialogBuilder(this)
+                            .setMessage(getString(R.string.text_todo_deleted))
+                            .setNeutralButton(getString(R.string.dialog_ok)) { _, _ ->
+                                finish()
+                            }
+                            .show()
+                    }
+
                     is StateView.DataLoaded -> {
                         loading = closeLoading(this,loading)
                         val todo = stateView.data
-                        binding.tvHeader.text = (binding.tvHeader.text as String).replace("#id","#${todo.id}")
+                        binding.tilId.text = "${todo.id}"
                         binding.tilTitle.text = todo.title
                         binding.tilDescription.text = todo.description
                         binding.tilDate.text = todo.date
@@ -72,9 +87,10 @@ class DetailTodoActivity:AppCompatActivity() {
                     is StateView.DataSaved -> {
                         loading = closeLoading(this,loading)
                         val todo = stateView.data
-                        binding.tvHeader.text = (binding.tvHeader.text as String).replace("#id","#${todo.id}")
+                        binding.tilId.text = "${todo.id}"
                         binding.toolbar.title = getString(R.string.appBar_detail_activity_edit)
-                        Snackbar.make(binding.root,"Tarefa salva com sucesso", Snackbar.LENGTH_LONG).show()
+                        binding.btnDelete.visibility = View.VISIBLE
+                        Snackbar.make(binding.root,getString(R.string.text_todo_saved), Snackbar.LENGTH_LONG).show()
                     }
 
                     is StateView.Error -> {
@@ -88,22 +104,34 @@ class DetailTodoActivity:AppCompatActivity() {
             binding.btnSave.setOnClickListener {
 
                 if(validarCampos()){
-                    val id = Regex("[^0-9]").replace(binding.tvHeader.text.split("#")[1],"")
-                    viewModel.saveTodo(Todo(if(id.isEmpty()) 0 else id.toInt() ,
+                    viewModel.saveTodo(Todo(if(binding.tilId.text.isEmpty()) 0 else binding.tilId.text.toInt() ,
                                             binding.tilTitle.text,
                                             binding.tilDescription.text,
                                             binding.tilDate.text,
                                             binding.tilTime.text,
                                             binding.swDone.isChecked))
                 }else{
-                    Snackbar.make(binding.root,"Por favor preencha todos campos para continuar",Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root,getString(R.string.text_verify_fields),Snackbar.LENGTH_LONG).show()
                 }
 
             }
 
-            binding.btnCancel.setOnClickListener {
-                setResult(RESULT_OK)
-                finish()
+            binding.btnDelete.setOnClickListener {
+                MaterialAlertDialogBuilder(this@DetailTodoActivity)
+                    .setTitle(getString(R.string.dialog_title_delete_todo))
+                    .setMessage(getString(R.string.dialog_message_delete_todo))
+                    .setPositiveButton(getString(R.string.dialog_confirm_positive)) { _, _ ->
+                        viewModel.deleteTodo(Todo(if(binding.tilId.text.isEmpty()) 0 else binding.tilId.text.toInt() ,
+                            binding.tilTitle.text,
+                            binding.tilDescription.text,
+                            binding.tilDate.text,
+                            binding.tilTime.text,
+                            binding.swDone.isChecked))
+                    }
+                    .setNegativeButton(getString(R.string.dialog_confirm_negative)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
             }
 
             binding.tilDate.editText?.setOnClickListener{

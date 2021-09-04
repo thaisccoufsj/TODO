@@ -1,23 +1,50 @@
 <resources>
-    <string name="app_name">TODO</string>
+    <!-- Nome do app e de barras de tarefas -->
+    <string name="app_name">Tarefas</string>
+    <string name="appBar_detail_activity_edit">Editar Tarefa</string>
+
+    <!-- Labels -->
     <string name="label_title">Título</string>
     <string name="label_description">Descrição</string>
     <string name="label_date">Data</string>
     <string name="label_time">Hora</string>
     <string name="label_create_task">Criar tarefa</string>
     <string name="label_cancel">Cancelar</string>
-
-    <string name="tag_datepicker">TAG_DATEPICKER</string>
-    <string name="tag_timepicker">TAG_TIMEPICKER</string>
     <string name="label_tasks">Tarefas</string>
     <string name="label_edit">Editar</string>
-    <string name="label_delete">Deletar</string>
+    <string name="label_delete">Excluir</string>
     <string name="label_yout_dont_have_tasks">Ops! Você não possui\n nenhuma tarefa</string>
-    <string name="text_loading">Carregando…</string>
     <string name="label_save">Salvar</string>
     <string name="label_header_edit_todo">Tarefa (id: #id)</string>
-    <string name="done">Finalizada</string>
-    <string name="tag_done">Finalizado</string>
-    <string name="tag_loading">Aguarde…</string>
-    <string name="appBar_detail_activity_edit">Editar Tarefa</string>
+    <string name="label_done">Finalizada</string>
+    <string name="label_loading">Aguarde…</string>
+    <string name="label_loading_rv">Carregando…</string>
+    <string name="label_id">Id</string>
+    <string name="label_filter">Filtro :</string>
+    <string name="label_title_item_todo">%1$d - %2$s</string>
+
+    <!-- TAGS -->
+    <string name="tag_datepicker">TAG_DATEPICKER</string>
+    <string name="tag_timepicker">TAG_TIMEPICKER</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_confirm_positive">Sim</string>
+    <string name="dialog_confirm_negative">Não</string>
+    <string name="dialog_title_delete_todo">Confirmação</string>
+    <string name="dialog_message_delete_todo">Tem certeza que deseja excluir esta tarefa?</string>
+
+    <!-- Mensagens -->
+    <string name="text_todo_deleted">A tarefa foi excluída com sucesso</string>
+    <string name="text_verify_fields">Por favor preencha todos campos para continuar</string>
+    <string name="text_todo_saved">Tarefa salva com sucesso</string>
+
+    <!-- Menu -->
+    <string name="menu_filter">Filtros</string>
+    <string name="menu_filter_all">Todas</string>
+    <string name="menu_filter_done">Finalizadas</string>
+    <string name="menu_filter_pending">Pendentes</string>
+    <string name="menu_filter_today">Dia atual</string>
+    <string name="menu_filter_month">Mês atual</string>
+
 </resources>

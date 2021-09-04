@@ -1,14 +1,13 @@
 package com.sandim.todo.data.repository
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import com.sandim.todo.model.Todo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class TodoRepoImpl(val application: Application):TodoRepo {
+class TodoRepoImpl(application: Application):TodoRepo {
 
     private var todoDao :TodoDao
 
@@ -46,6 +45,66 @@ class TodoRepoImpl(val application: Application):TodoRepo {
             }
         }
 
+    }
+
+    override fun listTodoDone(callback: RepositoryCallback<List<Todo>>){
+        CoroutineScope(Dispatchers.IO).launch {
+            try{
+                val list = todoDao.listTodoDone()
+                withContext(Dispatchers.Main){
+                    callback.onSucesso(list)
+                }
+            }catch (e:Exception){
+                withContext(Dispatchers.Main){
+                    callback.onFalha(e)
+                }
+            }
+        }
+    }
+
+    override fun getTodoPending(callback: RepositoryCallback<List<Todo>>){
+        CoroutineScope(Dispatchers.IO).launch {
+            try{
+                val list = todoDao.getTodoPending()
+                withContext(Dispatchers.Main){
+                    callback.onSucesso(list)
+                }
+            }catch (e:Exception){
+                withContext(Dispatchers.Main){
+                    callback.onFalha(e)
+                }
+            }
+        }
+    }
+
+    override fun getTodoToday(date:String,callback: RepositoryCallback<List<Todo>>){
+        CoroutineScope(Dispatchers.IO).launch {
+            try{
+                val list = todoDao.getTodoToday(date)
+                withContext(Dispatchers.Main){
+                    callback.onSucesso(list)
+                }
+            }catch (e:Exception){
+                withContext(Dispatchers.Main){
+                    callback.onFalha(e)
+                }
+            }
+        }
+    }
+
+    override fun getTodoMonth(date:String,callback: RepositoryCallback<List<Todo>>){
+        CoroutineScope(Dispatchers.IO).launch {
+            try{
+                val list = todoDao.getTodoMonth(date)
+                withContext(Dispatchers.Main){
+                    callback.onSucesso(list)
+                }
+            }catch (e:Exception){
+                withContext(Dispatchers.Main){
+                    callback.onFalha(e)
+                }
+            }
+        }
     }
 
     override fun insert(todo: Todo,callback: RepositoryCallback<Long>){

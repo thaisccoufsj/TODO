@@ -16,6 +16,7 @@ import com.sandim.todo.features.detailTodo.DetailTodoActivity
 import com.sandim.todo.model.StateView
 import com.sandim.todo.features.listTodo.viewModel.ListTodoViewModel
 import com.sandim.todo.features.ViewModelFactory
+import com.sandim.todo.model.Todo
 import com.sandim.todo.utils.Constants
 import com.sandim.todo.utils.Constants.Companion.KEY_EXTRA_TODO_ACTION
 import com.sandim.todo.utils.Constants.Companion.KEY_EXTRA_TODO_ADD
@@ -46,9 +47,10 @@ class ListTodosActivity:AppCompatActivity() {
             createActivityLauncher.launch(intent)
         }
 
-        todoListAdapter = TodoListAdapter(onClickEdit = {todo,position ->
+        todoListAdapter = TodoListAdapter(this,
+            onClickEdit = {todo,_ ->
             detailTodo(todo.id)
-        },onClickDelete = {todo,position ->
+        },onClickDelete = {todo,_ ->
             viewModel.deleteItem(todo)
         })
 
@@ -63,16 +65,26 @@ class ListTodosActivity:AppCompatActivity() {
                 is StateView.Loading -> {
                     binding.rvTasks.visibility = View.GONE
                     binding.viewLoading.root.visibility = View.VISIBLE
+                    binding.LLEmptyTodo.visibility = View.GONE
                 }
 
                 is StateView.DataLoaded -> {
                     binding.viewLoading.root.visibility = View.GONE
-                    binding.rvTasks.visibility = View.VISIBLE
+                    if(stateView.data.isEmpty()){
+                        binding.rvTasks.visibility = View.GONE
+                        binding.LLEmptyTodo.visibility = View.VISIBLE
+                    }else{
+                        binding.rvTasks.visibility = View.VISIBLE
+                        binding.LLEmptyTodo.visibility = View.GONE
+                    }
                     todoListAdapter.updateList(stateView.data)
                 }
 
                 is StateView.Error -> {
                     binding.viewLoading.root.visibility = View.GONE
+                    binding.LLEmptyTodo.visibility = View.VISIBLE
+                    binding.rvTasks.visibility = View.GONE
+                    todoListAdapter.updateList(arrayListOf())
                     Snackbar.make(binding.root,stateView.error.message ?: "Erro desconhecido",Snackbar.LENGTH_LONG).show()
                 }
 
@@ -82,6 +94,38 @@ class ListTodosActivity:AppCompatActivity() {
         })
 
         viewModel.getAllTodo()
+
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.menuFilterAll -> {
+                    viewModel.getAllTodo()
+                    true
+                }
+
+                R.id.menuFilterToday -> {
+                    viewModel.getTodosToday()
+                    true
+                }
+
+                R.id.menuFilterMonth -> {
+                    viewModel.getTodosMonth()
+                    true
+                }
+
+                R.id.menuFilterDone -> {
+                    viewModel.getTodosDone()
+                    true
+                }
+
+                R.id.menuFilterPending -> {
+                    viewModel.getTodosPending()
+                    true
+                }
+
+                else -> false
+
+            }
+        }
 
     }
 

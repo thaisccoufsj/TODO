@@ -1,5 +1,6 @@
 package com.sandim.todo.features.listTodo;
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +9,7 @@ import com.sandim.todo.databinding.ListItemTodoBinding
 import com.sandim.todo.model.Todo
 
 class TodoListAdapter(
+    private val context: Context,
     private val onClickEdit: (Todo, Int) -> Unit,
     private val onClickDelete:(Todo,Int) ->Unit
     ): RecyclerView.Adapter<TodoListAdapter.ViewHolder>()  {
@@ -43,7 +45,7 @@ class TodoListAdapter(
             }
 
             binding.apply {
-                tvTitle.text = todo.title
+                tvTitle.text = context.getString(R.string.label_title_item_todo,todo.id,todo.title)
                 tvContent.text = todo.description
                 tvDate.text = todo.date
                 tvTime.text = todo.time

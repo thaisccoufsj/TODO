@@ -3,11 +3,11 @@ package com.sandim.todo.features.listTodo.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.sandim.todo.data.repository.RepositoryCallback
 import com.sandim.todo.data.repository.TodoRepo
 import com.sandim.todo.model.StateView
 import com.sandim.todo.model.Todo
+import com.sandim.todo.utils.currentDate
 
 class ListTodoViewModel(private val repository: TodoRepo):ViewModel() {
 
@@ -30,6 +30,67 @@ class ListTodoViewModel(private val repository: TodoRepo):ViewModel() {
         })
 
     }
+
+    fun getTodosDone(){
+        _stateView.value = StateView.Loading
+
+        repository.listTodoDone(object : RepositoryCallback<List<Todo>>{
+            override fun onSucesso(todos: List<Todo>?) {
+                _stateView.value = StateView.DataLoaded(todos ?: arrayListOf())
+            }
+
+            override fun onFalha(t: Throwable) {
+                _stateView.value = StateView.Error(Exception(t.message))
+            }
+        })
+
+    }
+
+    fun getTodosPending(){
+
+        _stateView.value = StateView.Loading
+
+        repository.getTodoPending(object : RepositoryCallback<List<Todo>>{
+            override fun onSucesso(todos: List<Todo>?) {
+                _stateView.value = StateView.DataLoaded(todos ?: arrayListOf())
+            }
+
+            override fun onFalha(t: Throwable) {
+                _stateView.value = StateView.Error(Exception(t.message))
+            }
+        })
+    }
+
+    fun getTodosToday(){
+
+        _stateView.value = StateView.Loading
+
+        repository.getTodoToday(currentDate(),object : RepositoryCallback<List<Todo>>{
+            override fun onSucesso(todos: List<Todo>?) {
+                _stateView.value = StateView.DataLoaded(todos ?: arrayListOf())
+            }
+
+            override fun onFalha(t: Throwable) {
+                _stateView.value = StateView.Error(Exception(t.message))
+            }
+        })
+    }
+
+    fun getTodosMonth(){
+
+        _stateView.value = StateView.Loading
+
+        repository.getTodoMonth(currentDate(),object : RepositoryCallback<List<Todo>>{
+            override fun onSucesso(todos: List<Todo>?) {
+                _stateView.value = StateView.DataLoaded(todos ?: arrayListOf())
+            }
+
+            override fun onFalha(t: Throwable) {
+                _stateView.value = StateView.Error(Exception(t.message))
+            }
+        })
+    }
+
 
     fun deleteItem(todo:Todo){
         _stateView.value = StateView.Loading

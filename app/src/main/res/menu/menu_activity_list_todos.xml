@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+    android:id="@+id/btnFilter"
+    android:icon="@drawable/ic_filter"
+    app:showAsAction="ifRoom"
+    android:title="@string/menu_filter"
+    android:contentDescription="@string/menu_filter"
+    >
+
+    <menu>
+        <item
+            android:id="@+id/menuFilterAll"
+            android:title="@string/menu_filter_all"
+            android:contentDescription="@string/menu_filter_all"
+            />
+
+        <item
+            android:id="@+id/menuFilterToday"
+            android:title="@string/menu_filter_today"
+            android:contentDescription="@string/menu_filter_today"
+            />
+
+        <item
+            android:id="@+id/menuFilterMonth"
+            android:title="@string/menu_filter_month"
+            android:contentDescription="@string/menu_filter_month"
+            />
+
+        <item
+            android:id="@+id/menuFilterDone"
+            android:title="@string/menu_filter_done"
+            android:contentDescription="@string/menu_filter_done"
+            />
+
+        <item
+            android:id="@+id/menuFilterPending"
+            android:title="@string/menu_filter_pending"
+            android:contentDescription="@string/menu_filter_pending"
+            />
+    </menu>
+
+</item>
+
+</menu>

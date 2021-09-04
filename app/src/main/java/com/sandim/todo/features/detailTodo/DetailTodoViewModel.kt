@@ -10,7 +10,7 @@ import com.sandim.todo.data.repository.RepositoryCallback
 import com.sandim.todo.model.StateView
 import com.sandim.todo.model.Todo
 
-class DetailTodoViewModel(private val repository: TodoRepo, private val bundle: Bundle?): ViewModel() {
+class DetailTodoViewModel(private val repository: TodoRepo, bundle: Bundle?): ViewModel() {
 
     private val _stateView = MutableLiveData<StateView<Todo>>()
     val stateView: LiveData<StateView<Todo>>
@@ -22,49 +22,74 @@ class DetailTodoViewModel(private val repository: TodoRepo, private val bundle: 
     }
 
 
-    fun loadTodo(id:Int){
+    private fun loadTodo(id:Int){
 
         _stateView.value = StateView.Loading
 
-        repository.getTodo(id.toLong(),object: RepositoryCallback<Todo>{
-            override fun onSucesso(todos: Todo?) {
-                if(todos != null) _stateView.value = StateView.DataLoaded(todos)
-            }
+        Thread{
+            repository.getTodo(id.toLong(),object: RepositoryCallback<Todo>{
+                override fun onSucesso(todos: Todo?) {
+                    if(todos != null) _stateView.value = StateView.DataLoaded(todos)
+                }
 
-            override fun onFalha(t: Throwable) {
-                _stateView.value = StateView.Error(Exception("Erro ao carregar todo."))
-            }
+                override fun onFalha(t: Throwable) {
+                    _stateView.value = StateView.Error(Exception("Erro ao carregar todo."))
+                }
 
-        })
+            })
+        }.start()
+
     }
 
     fun saveTodo(todo:Todo){
 
         _stateView.value = StateView.Loading
 
-        if(todo.id > 0){
-            repository.update(todo,object:RepositoryCallback<Int>{
+        Thread{
+            if(todo.id > 0){
+                repository.update(todo,object:RepositoryCallback<Int>{
+                    override fun onSucesso(todos: Int?) {
+                        _stateView.value = StateView.DataSaved(todo)
+                    }
+
+                    override fun onFalha(t: Throwable) {
+                        _stateView.value = StateView.Error(Exception("Não foi possível salvar."))
+                    }
+
+                })
+            }else{
+                repository.insert(todo,object : RepositoryCallback<Long>{
+                    override fun onSucesso(todos: Long?) {
+                        _stateView.value = StateView.DataSaved(Todo(todos?.toInt() ?: 0,todo.title,todo.description,todo.date,todo.time,todo.done))
+                    }
+
+                    override fun onFalha(t: Throwable) {
+                        _stateView.value = StateView.Error(Exception("Não foi possível salvar."))
+                    }
+
+                })
+            }
+        }.start()
+
+    }
+
+    fun deleteTodo(todo:Todo){
+
+        _stateView.value = StateView.Loading
+
+        Thread {
+            repository.delete(todo, object : RepositoryCallback<Int> {
+
                 override fun onSucesso(todos: Int?) {
-                   _stateView.value = StateView.DataSaved(todo)
+                    _stateView.value = StateView.DataDeleted
                 }
 
                 override fun onFalha(t: Throwable) {
                     _stateView.value = StateView.Error(Exception("Não foi possível salvar."))
                 }
-
             })
-        }else{
-            repository.insert(todo,object : RepositoryCallback<Long>{
-                override fun onSucesso(todos: Long?) {
-                    _stateView.value = StateView.DataSaved(Todo(todos?.toInt() ?: 0,todo.title,todo.description,todo.date,todo.time,todo.done))
-                }
+        }.start()
 
-                override fun onFalha(t: Throwable) {
-                    _stateView.value = StateView.Error(Exception("Não foi possível salvar."))
-                }
-
-            })
-        }
     }
 
 }

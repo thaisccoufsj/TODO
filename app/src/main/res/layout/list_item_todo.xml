@@ -94,7 +94,7 @@
             app:srcCompat="@drawable/ic_pending"
             android:scaleType="fitStart"
             android:layout_marginStart="5dp"
-            android:contentDescription="@string/tag_done"
+            android:contentDescription="@string/label_done"
             />
 
         <TextView
